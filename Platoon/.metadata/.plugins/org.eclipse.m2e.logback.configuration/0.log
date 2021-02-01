@@ -1,0 +1,96 @@
+2021-02-01 01:44:26,031 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-02-01 01:45:44,461 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.jar
+2021-02-01 01:45:44,742 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.12.4/maven-surefire-plugin-2.12.4.jar
+2021-02-01 01:45:52,617 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.fh-dortmund:maven-platoon:0.0.1-SNAPSHOT @ D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon\pom.xml.
+2021-02-01 01:45:54,162 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /maven-platoon/src/main/java
+2021-02-01 01:45:54,173 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /maven-platoon/src/main/resources
+2021-02-01 01:45:54,289 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /maven-platoon/src/test/java
+2021-02-01 01:45:54,289 [Worker-6: Creating project "maven-platoon"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /maven-platoon/src/test/resources
+2021-02-01 01:45:56,414 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:45:56,461 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:45:56,463 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:45:56,478 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:33,214 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:33,296 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:33,306 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:33,332 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:34,491 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:34,536 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:34,537 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:34,550 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:59,912 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:59,925 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:48:59,926 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:48:59,944 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:49:14,655 [Worker-3: Launching Executing test in D__Google Drive_Education_Masters_1. Semester_1- Distributed and Parallel Systems (10120 -21)_Project_Workspace_Platoon_maven-platoon] INFO  o.e.m.i.launch.MavenLaunchDelegate - D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon
+2021-02-01 01:49:14,656 [Worker-3: Launching Executing test in D__Google Drive_Education_Masters_1. Semester_1- Distributed and Parallel Systems (10120 -21)_Project_Workspace_Platoon_maven-platoon] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B test
+2021-02-01 01:50:02,127 [Worker-5: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:50:02,142 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:50:02,147 [Worker-5: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:50:02,156 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:54:22,509 [Worker-3: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.fh-dortmund:maven-platoon:0.0.1-SNAPSHOT @ D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon\pom.xml.
+2021-02-01 01:54:22,888 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:54:22,899 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:54:22,903 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:54:22,916 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:54:26,421 [Worker-10: Launching Executing test in D__Google Drive_Education_Masters_1. Semester_1- Distributed and Parallel Systems (10120 -21)_Project_Workspace_Platoon_maven-platoon] INFO  o.e.m.i.launch.MavenLaunchDelegate - D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon
+2021-02-01 01:54:26,421 [Worker-10: Launching Executing test in D__Google Drive_Education_Masters_1. Semester_1- Distributed and Parallel Systems (10120 -21)_Project_Workspace_Platoon_maven-platoon] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B test
+2021-02-01 01:54:40,466 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:54:40,485 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:54:40,488 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:54:40,506 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:56:58,085 [Worker-3: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.fh-dortmund:maven-platoon:0.0.1-SNAPSHOT @ D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon\pom.xml.
+2021-02-01 01:56:58,282 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:56:58,297 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:56:58,301 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:56:58,313 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:57:11,294 [Worker-3: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.fh-dortmund:maven-platoon:0.0.1-SNAPSHOT @ D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon\pom.xml.
+2021-02-01 01:57:12,522 [Worker-13: reload maven project] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/eclipse/paho/org.eclipse.paho.client.mqttv3/%VERSION%/org.eclipse.paho.client.mqttv3-%VERSION%.pom
+2021-02-01 01:57:12,691 [Worker-3: Building] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/eclipse/paho/org.eclipse.paho.client.mqttv3/%VERSION%/org.eclipse.paho.client.mqttv3-%VERSION%.pom
+2021-02-01 01:57:12,854 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:57:12,864 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:57:12,867 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:57:12,875 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:57:15,150 [Worker-13: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/eclipse/paho/org.eclipse.paho.client.mqttv3/%VERSION%/org.eclipse.paho.client.mqttv3-%VERSION%-sources.jar
+2021-02-01 01:57:15,191 [Worker-13: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for org.eclipse.paho:org.eclipse.paho.client.mqttv3:%VERSION%
+org.eclipse.core.runtime.CoreException: Could not resolve artifact org.eclipse.paho:org.eclipse.paho.client.mqttv3:jar:sources:%VERSION%
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:804)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:114)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:772)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:749)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:330)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:304)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:269)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:233)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:161)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:179)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:153)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:101)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:161)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2021-02-01 01:58:07,492 [Worker-12: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.fh-dortmund:maven-platoon:0.0.1-SNAPSHOT @ D:\Google Drive\Education\Masters\1. Semester\1- Distributed and Parallel Systems (10120 -21)\Project\Workspace\Platoon\maven-platoon\pom.xml.
+2021-02-01 01:58:08,205 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:08,218 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:58:08,220 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:08,235 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:58:09,453 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:09,516 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:58:09,518 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:09,532 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:58:10,206 [Worker-12: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.eclipse.org/content/repositories/paho-releases/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0-sources.jar
+2021-02-01 01:58:11,520 [Worker-12: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.eclipse.org/content/repositories/paho-releases/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.0/org.eclipse.paho.client.mqttv3-1.2.0-sources.jar
+2021-02-01 01:58:11,888 [Worker-12: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0
+2021-02-01 01:58:12,038 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:12,051 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:58:12,053 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:58:12,065 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:59:02,073 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:59:02,089 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 01:59:02,091 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-02-01 01:59:02,112 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-02-01 18:23:35,751 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-02-01 18:48:16,201 [Worker-13: Fetch from TruckPlatoon-Socrates - origin] INFO  o.a.s.c.u.s.e.EdDSASecurityProviderRegistrar - getOrCreateProvider(EdDSA) created instance of net.i2p.crypto.eddsa.EdDSASecurityProvider
+2021-02-01 18:48:16,404 [Worker-13: Fetch from TruckPlatoon-Socrates - origin] INFO  o.a.s.c.i.DefaultIoServiceFactoryFactory - No detected/configured IoServiceFactoryFactory using Nio2ServiceFactoryFactory
