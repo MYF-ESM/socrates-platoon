@@ -1,0 +1,18 @@
+//module dps_truck_platooning {
+//	
+//}
+public class Truck extends Thread implements TruckProperties 
+{
+	private final Role role;	
+	
+	Truck(Role role)
+	{
+		this.role = role;
+	}
+	
+   
+    public void run()
+    {
+    	
+    }
+}

@@ -1,0 +1,8 @@
+package com.platoon;
+import java.net.*;
+public interface TruckProperties {
+	String licensePlate = "";
+	String VIN = "";
+	//InetAddress platoonIP;
+	int platPort = 0;
+}
