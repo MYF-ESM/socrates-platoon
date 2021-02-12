@@ -1,0 +1,22 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client_create extends Thread {
+	
+	private ObjectOutputStream outStream = null;
+	private ObjectInputStream inStream = null;
+	
+	Client_create() throws IOException
+	{
+		InetAddress ip = InetAddress.getByName("localhost"); 
+		Socket s = new Socket(ip, 5056); 
+		inStream = new ObjectInputStream(s.getInputStream());
+		outStream = new ObjectOutputStream(s.getOutputStream());
+	}
+	
+	
+
+}

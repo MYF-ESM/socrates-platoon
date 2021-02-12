@@ -1,0 +1,20 @@
+
+public class Control_behavior {
+
+	
+	void brake()
+	{
+		if(input.get_brake_pedal_sts())
+		{
+			int truck_number = input.get_brakepedal_status_for_truck();
+			
+			for(int i = truck_number; i< 3; i++) 
+			{
+				
+			}
+		}
+	}
+	
+	Scan_input input = new Scan_input();
+	input.start();
+}

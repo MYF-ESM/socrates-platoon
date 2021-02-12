@@ -1,0 +1,16 @@
+import java.io.IOException;
+
+public class Truck_main {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		
+		Truck Master = new Truck(Role.LEAD);
+		Master.socket_create();
+		Truck client1 = new Truck(Role.FOLLOW);
+		client1.socket_create();
+		Truck client2 = new Truck(Role.FOLLOW);
+		client2.socket_create();
+	}
+
+}

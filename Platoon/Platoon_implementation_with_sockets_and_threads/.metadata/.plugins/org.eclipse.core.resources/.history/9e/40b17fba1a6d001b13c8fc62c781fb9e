@@ -1,0 +1,33 @@
+
+public class Control_behavior extends Thread {
+
+	public static Scan_input input = new Scan_input();
+	int[] truck_ids = new int[3];
+	Control_behavior()
+	{	
+	}
+	
+	boolean get_brake_pdl_sts()
+	{
+		return input.get_brake_pedal_sts();
+	}
+	int[] get_truck_ids_for_Braking()
+	{
+		
+		if(input.get_brake_pedal_sts())
+		{
+			int truck_number = input.get_brakepedal_status_for_truck();
+			ret_truck_id = 1;
+			for(int i = truck_number; i< 3; i++) 
+			{
+				truck_ids[i] = i;
+			}
+		}
+		return truck_ids;
+	}
+	
+	void start_input()
+	{
+		input.start();
+	}
+}

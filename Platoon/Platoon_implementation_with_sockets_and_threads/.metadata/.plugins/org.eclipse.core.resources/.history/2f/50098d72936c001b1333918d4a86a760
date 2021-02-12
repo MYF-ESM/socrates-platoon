@@ -1,0 +1,78 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client_create extends Thread {
+	
+	private ObjectOutputStream outStream = null;
+	private ObjectInputStream inStream = null;
+	BufferedReader s_in = null;
+	
+	Client_create() throws IOException
+	{
+		InetAddress ip = InetAddress.getByName("localhost"); 
+		Socket s = new Socket(ip, 5056); 
+		inStream = new ObjectInputStream(s.getInputStream());
+		outStream = new ObjectOutputStream(s.getOutputStream());
+	}
+	
+	public void instream_data_read()
+	{
+		 s_in = new BufferedReader(
+		            new InputStreamReader(s.getInputStream()));
+		//inStream = new ObjectInputStream(s.getInputStream());
+		System.out.println("inside Instream");
+		String client_output = s_in.readLine();
+		System.out.println(client_output);
+		signal = Parameters.valueOf(client_output); 
+//		signal = (Parameters) inStream.readObject();
+		
+		System.out.println("Value received at Server");
+	}
+	
+	class Instream_Handler extends Thread
+	{
+		final Socket s;
+		private ObjectInputStream inStream = null;
+		BufferedReader s_in = null;
+		Parameters signal = null;
+		Truck truck;
+		public Instream_Handler(Socket s, Truck truck)  
+		{ 
+			this.truck = truck;
+			this.s = s; 
+		}
+		public void run()  
+		{ 
+
+			while(true)
+			{
+				try {  
+					 System.out.println(" from Instream handler : Thread" + Thread.currentThread().getName());
+					 s_in = new BufferedReader(
+					            new InputStreamReader(s.getInputStream()));
+					//inStream = new ObjectInputStream(s.getInputStream());
+					System.out.println("inside Instream");
+					String client_output = s_in.readLine();
+					System.out.println(client_output);
+					signal = Parameters.valueOf(client_output); 
+//					signal = (Parameters) inStream.readObject();
+					
+					System.out.println("Value received at Server");
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+	
+	
+
+}

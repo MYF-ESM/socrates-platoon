@@ -1,0 +1,64 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server_create
+{
+	private final Truck truck;
+	private ServerSocket serverSocket = null;	
+	public Socket client_accept;
+	
+	Server_create(Truck truck)
+	{
+		this.truck = truck;
+		serverSocket = new ServerSocket(TruckProperties.platPort);
+	}
+	
+	void createSocket() {
+		while (true)  
+        { 
+			client_accept = null;
+			try {
+				serverSocket = new ServerSocket(TruckProperties.platPort);
+				System.out.println("Truck "+TruckProperties.licensePlate+ "has started the Platoon Server");
+				client_accept = serverSocket.accept();
+				System.out.println("Truck at "+client_accept.getInetAddress().getHostAddress()+ "has successfully connected to Platoon!");
+				Thread T1 = new ClientHandler(client_accept);
+				T1.start();
+				//Platoon[0]=this.truck;
+			}catch(IOException e){
+				System.out.println("Server failed to initiate: "+e.toString());
+				createSocket();
+			}
+        }
+	}
+}
+
+class ClientHandler extends Thread
+{
+    final DataInputStream dis; 
+    final DataOutputStream dos; 
+    final Socket s;
+    
+    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)  
+    { 
+        this.s = s; 
+        this.dis = dis; 
+        this.dos = dos; 
+    }
+    
+    public void run()  
+    { 
+    	 while (true)  
+         { 
+    		 try { 
+    		 }
+    		 catch()
+    		 {
+    		 }
+         }
+    }
+    }
+}

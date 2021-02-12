@@ -1,0 +1,30 @@
+import java.io.IOException;
+
+public class Truck{
+	private Role role;
+	private static int truck_id;
+	//private Server_create handler;
+	private Client_create sender;
+	
+	Truck(Role role) throws IOException
+	{
+		this.role = role;
+		truck_id = truck_id+1;
+
+	}
+	public void socket_create()
+	{		
+		if(this.role == Role.LEAD)
+		{
+			Thread handler = new Server_create(this);
+			handler.start();
+		}
+		else
+		{
+			sender = new Client_create();
+		}
+		
+	}
+	
+
+}

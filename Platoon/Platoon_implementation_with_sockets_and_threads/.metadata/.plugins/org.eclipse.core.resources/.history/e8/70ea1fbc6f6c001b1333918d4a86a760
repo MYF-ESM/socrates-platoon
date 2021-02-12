@@ -1,0 +1,19 @@
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client_create {
+	
+	Client_create()
+	{
+		InetAddress ip = InetAddress.getByName("localhost"); 
+		Socket s = new Socket(ip, 5056); 
+	}
+	
+	try
+	{
+		
+		
+		
+	}
+
+}

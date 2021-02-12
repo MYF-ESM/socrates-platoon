@@ -1,0 +1,12 @@
+import java.io.IOException;
+
+public class Truck_main {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		
+		Truck Master = new Truck(Role.LEAD);
+		
+	}
+
+}

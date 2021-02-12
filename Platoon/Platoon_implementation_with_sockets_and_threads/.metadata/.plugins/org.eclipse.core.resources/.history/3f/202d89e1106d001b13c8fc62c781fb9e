@@ -1,0 +1,29 @@
+
+public class Control_behavior extends Thread {
+
+	Control_behavior()
+	{
+		Scan_input input = new Scan_input();
+		
+	}
+	
+	String brake()
+	{
+		String ret_string = null;
+		if(input.get_brake_pedal_sts())
+		{
+			int truck_number = input.get_brakepedal_status_for_truck();
+			
+			for(int i = truck_number; i< 3; i++) 
+			{
+				ret_string = "Truck"+i+": Brake";
+			}
+		}
+		return ret_string;
+	}
+	
+	void start_input()
+	{
+		input.start();
+	}
+}

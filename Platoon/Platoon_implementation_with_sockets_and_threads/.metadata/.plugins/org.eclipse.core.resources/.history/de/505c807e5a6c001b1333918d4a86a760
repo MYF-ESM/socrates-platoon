@@ -1,0 +1,13 @@
+import java.net.ServerSocket;
+
+public class Server_create
+{
+	private final Truck truck;
+	private ServerSocket serverSocket = null;	
+	
+	Server_create(Truck truck)
+	{
+		this.truck = truck;
+		serverSocket = new ServerSocket(TruckProperties.platPort);
+	}
+}

@@ -1,0 +1,48 @@
+package com.platoon;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Socket_Creation {
+	private final Truck truck;
+	public Socket clientSocket;
+	private ServerSocket serverSocket = null;
+	
+	public Socket_Creation(Truck truck) {
+		this.truck = truck;
+	}
+	public void createSocket() {
+			
+			//If the truck is a Leader, initiate connection as a Server
+			if (truck.role == Role.LEAD) {
+				clientSocket = null;
+				try {
+					serverSocket = new ServerSocket(TruckProperties.platPort);
+					System.out.println("Truck "+TruckProperties.licensePlate+ "has started the Platoon Server");
+					clientSocket = serverSocket.accept();
+					System.out.println("Truck at "+clientSocket.getInetAddress().getHostAddress()+ "has successfully connected to Platoon!");
+					Thread T = new PlatoonHandler(truck);
+					//Platoon[0]=this.truck;
+				}catch(IOException e){
+					System.out.println("Server failed to initiate: "+e.toString());
+					createSocket();
+				}
+			}
+			//Follower truck creates a client socket
+			else if(truck.role == Role.FOLLOW) {
+				try {
+					clientSocket = new Socket(InetAddress.getByName(TruckProperties.platoonIP), TruckProperties.platPort);
+					System.out.println("Truck "+TruckProperties.licensePlate+ "has successfully connected to Platoon");
+					}catch(IOException e) {
+					System.out.println("Client failed to initiate: "+e.toString());
+					createSocket();
+				}
+			}
+		}
+	}
+
+}

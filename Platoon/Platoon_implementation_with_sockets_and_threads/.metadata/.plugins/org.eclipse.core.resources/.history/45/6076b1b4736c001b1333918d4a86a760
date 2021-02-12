@@ -1,0 +1,17 @@
+
+public class Truck {
+	private Role role;
+	private static int truck_id;
+	private Server_create handler;
+	
+	Truck(Role role)
+	{
+		this.role = role;
+		truck_id = truck_id+1;
+		if(this.role == Role.LEAD)
+		{
+			handler = new Server_create(this);
+		}
+	}
+
+}

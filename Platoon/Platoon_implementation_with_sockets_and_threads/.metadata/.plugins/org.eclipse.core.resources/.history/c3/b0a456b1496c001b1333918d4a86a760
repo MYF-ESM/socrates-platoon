@@ -1,0 +1,84 @@
+package com.platoon;
+import java.io.*;
+import java.net.*;
+
+public class PlatoonHandler extends Thread{
+	//private Truck [] Platoon = new Truck[3];
+	public Socket clientSocket;
+	private ServerSocket serverSocket = null;	
+	private final Truck truck;
+	private ObjectOutputStream outStream = null;
+	private ObjectInputStream inStream = null;
+	
+	public PlatoonHandler(Truck truck) {
+		this.truck = truck;
+	}
+	
+	
+	//Sending a signal to connected Client. Typically from Leading truck to a follower.
+	public void sendState(Socket client, Parameters state) {
+		try {
+			outStream = new ObjectOutputStream(client.getOutputStream());			
+			outStream.writeObject(state);
+			outStream.flush();
+			outStream.close();
+			client.close();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+	}
+	//Receiving a signal from leading truck.
+	public Parameters receiveState(Socket client) {
+		Parameters signal = null;
+		try {
+			inStream = new ObjectInputStream(client.getInputStream());			
+			signal = (Parameters) inStream.readObject();
+			inStream.close();
+			client.close();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+		return signal;		
+	}
+	//Sending all the truck data to Server
+	public void sendMessage(Socket client) {
+		try {
+			outStream = new ObjectOutputStream(client.getOutputStream());			
+			outStream.writeObject(this.truck);
+			outStream.flush();
+			outStream.close();
+			client.close();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+	}
+	//Receive Truck Data from Client
+	public Truck receiveMessage(Socket client) {
+		Truck truck = null;
+		try {
+			inStream = new ObjectInputStream(client.getInputStream());			
+			truck = (Truck) inStream.readObject();
+			inStream.close();
+			client.close();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}		
+		return truck;		
+	}
+	//Closing Connection and Releasing Resources
+	public void closeConnection() {
+		System.out.println("Closing the connection of "+TruckProperties.licensePlate);
+		try {
+			serverSocket.close();
+			clientSocket.close();
+			inStream.close();
+			outStream.close();
+		} catch (IOException e) {
+			System.out.println("Closing Connection Failed !");
+			e.printStackTrace();
+		}
+	}
+	
+	
+}
+
