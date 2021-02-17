@@ -1,0 +1,73 @@
+package com.platoon;
+import java.io.Serializable;
+
+//module dps_truck_platooning {
+//	
+//}
+public class Truck extends Thread implements TruckProperties,Serializable 
+{
+	protected final Role role;	
+	private Mode mode;
+	protected State state;
+	private boolean temprature,fuelLevel,seatBelt;
+	private PlatoonHandler handler;
+	
+	public Truck(Role role)
+	{
+		this.role = role;
+		handler = new PlatoonHandler(this);
+	}
+	
+   public static void main(String [] args) {
+	   //Initialization of Connections
+	   Truck truck = null;
+	   PlatoonHandler truck_handler = truck.getHandler();
+	   if(args[0]=="LEAD") {
+		   truck = new Truck(Role.LEAD);		   		   
+	   }else if(args[0]=="FOLLOWER") {
+		   truck = new Truck(Role.FOLLOW);
+	   }
+	   truck.setHandler(new PlatoonHandler(truck));
+	   truck_handler.createSocket();	   
+	   //Client Based Messages
+	   truck_handler.sendMessage(truck_handler.getClientSocket());	   
+	   truck.setState(truck_handler.receiveState(truck_handler.getClientSocket()));
+	   //Master Based Messages
+	   
+	   
+   }
+    public void run()
+    {
+    	
+    }
+
+    public String getLicensePlate() {
+    	return TruckProperties.licensePlate;
+    }
+	public Mode getMode() {
+		return mode;
+	}
+
+
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	public PlatoonHandler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(PlatoonHandler handler) {
+		this.handler = handler;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+
+}
