@@ -11,6 +11,8 @@ public class Scan_input extends Thread {
 		int input;
 		System.out.println("Enter 0 for Setting speed, 1 for pressing the brake");
 		Scanner scan = new Scanner(System.in);
+		//if(scan.nextChar()) == 'B'
+		//this.Truck.brake = true;
 		while(scan.hasNext())
 		{
 			input = scan.nextInt();

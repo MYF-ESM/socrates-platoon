@@ -1,8 +1,7 @@
 package com.platoon;
 import java.net.*;
-public interface TruckProperties {
-	String licensePlate = "";
+public interface TruckProperties {	
 	String VIN = "";
-	String platoonIP = "";
-	int platPort = 0;
+	String platoonIP = "127.0.0.1";
+	int platPort =9130;
 }
