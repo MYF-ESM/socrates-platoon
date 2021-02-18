@@ -1,0 +1,100 @@
+package com.platoon;
+
+import java.io.Serializable;
+import java.net.ServerSocket;
+
+public class SingleTruck extends Thread implements TruckProperties,Serializable {
+	protected final Role role;	
+	private String licensePlate;
+	private Mode mode;
+	protected Status state;
+	private boolean temprature,fuelLevel,seatBelt;
+	//Needed only for Leading Truck
+	transient private int num_of_clients =0;
+	transient private Truck [] Platoon = new Truck[2];
+	transient private Truck platoon_truck = null;
+	transient private ServerSocket serverSocket = null;	
+	public SingleTruck(Role role)
+	{
+		this.role = role;		
+		this.mode = mode.AUTONOMOUS;
+		this.state = Status.NORMAL;
+		this.temprature = false;
+		this.fuelLevel = false;
+		this.seatBelt = false;
+	}
+	
+	public static void main(String[] args) {
+		 //Initialization of Connections
+		SingleTruck truck = null;	   
+		   if(args[0].equalsIgnoreCase("L")) {
+			   truck = new SingleTruck(Role.LEAD);
+			   truck.setLicensePlate(args[1]);
+		   }else if(args[0].equalsIgnoreCase("F")) {
+			   truck = new SingleTruck(Role.FOLLOW);
+			   truck.setLicensePlate(args[1]);
+			   
+		   }
+		   
+	}
+	
+	
+	public String getLicensePlate() {
+    	return licensePlate;
+    }
+    public void setLicensePlate(String lp) {
+    	licensePlate = lp;
+    }
+	public Mode getMode() {
+		return mode;
+	}
+
+
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+	
+	public Status getStatus() {
+		return state;
+	}
+
+	public void setStatus(Status state) {
+		this.state = state;
+	}
+	
+
+	public void setState(Status state) {
+		this.state = state;
+	}
+
+	public boolean isTemprature() {
+		return temprature;
+	}
+
+	public void setTemprature(boolean temprature) {
+		this.temprature = temprature;
+	}
+
+	public boolean isFuelLevel() {
+		return fuelLevel;
+	}
+
+	public void setFuelLevel(boolean fuelLevel) {
+		this.fuelLevel = fuelLevel;
+	}
+
+	public boolean isSeatBelt() {
+		return seatBelt;
+	}
+
+	public void setSeatBelt(boolean seatBelt) {
+		this.seatBelt = seatBelt;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+
+}
+

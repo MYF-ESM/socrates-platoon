@@ -1,9 +1,6 @@
 package com.platoon;
 import java.io.Serializable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 
 //module dps_truck_platooning {
 //	
@@ -29,41 +26,19 @@ public class Truck extends Thread implements TruckProperties,Serializable
 		this.seatBelt = false;
 	}
 	
-   public static void main(String [] args) throws InterruptedException, ExecutionException {
-	   //Initialization of Connections
-	   Truck truck = null;	   
-	   if(args[0].equalsIgnoreCase("L")) {
-		   truck = new Truck(Role.LEAD);		   
-	   }else if(args[0].equalsIgnoreCase("F")) {
-		   truck = new Truck(Role.FOLLOW);
-	   }
-	   truck.setLicensePlate(args[1]);
-	   truck.setHandler(new PlatoonHandler(truck));
-	   truck.getHandler().createSocket();
-	  
-	   //Client Based Messages
-	   //Get ExecutorService from Executors utility class, thread pool size is 10
-       //ExecutorService executor = Executors.newFixedThreadPool(10);       
-       /*
-        * The following sections enables the Client to receive status from Server,
-        * and update itself accordingly.
-        * For detailed explanation about Callables/Future; see the following video
-        * https://www.youtube.com/watch?v=NEZ2ASoP_nY
-        * */  
-       //Future<Status> current_state = executor.submit(truck.getHandler().new receiveState(truck.getHandler().getClientSocket()));
-       //Blocking update Block
-       //truck.setStatus(current_state.get());
-		
-       
-       //truck.getHandler().sendMessage(truck.getHandler().getClientSocket());
-	   //truck.setStatus(truck.getHandler().receiveState(truck.getHandler().getClientSocket()));
-	   
-       
-       
-	   //Master Based Messages
-	   
-	   
-   }
+//   public static void main(String [] args) throws InterruptedException {
+//	   //Initialization of Connections
+//	   Truck truck = null;	   
+//	   if(args[0].equalsIgnoreCase("L")) {
+//		   truck = new Truck(Role.LEAD);		   
+//	   }else if(args[0].equalsIgnoreCase("F")) {
+//		   truck = new Truck(Role.FOLLOW);
+//	   }
+//	   truck.setLicensePlate(args[1]);
+//	   truck.setHandler(new PlatoonHandler(truck));
+//	   truck.getHandler().createSocket();
+//	  	   
+//   }
     public void run()
     {
     	
