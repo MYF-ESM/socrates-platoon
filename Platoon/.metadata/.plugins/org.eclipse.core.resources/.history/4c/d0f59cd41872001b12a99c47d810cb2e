@@ -11,17 +11,19 @@ import java.net.UnknownHostException;
 
 public class SingleTruck extends Thread implements TruckProperties,Serializable {
 	transient protected final Role role;	
-	private String licensePlate;
+	transient private String licensePlate;
 	transient private Mode mode;
 	protected Status state;
 	private boolean temprature,fuelLevel,seatBelt;
 	//Needed only for Leading Truck
 	transient private static int num_of_clients =0;
-	transient private Socket [] Platoon = new Socket[2];	
+	transient private Socket [] Platoon = new Socket[2];
+	transient private Truck platoon_truck = null;
 	transient private static ServerSocket serverSocket;
 	public SingleTruck(Role role)
 	{
 		this.role = role;		
+		this.mode = mode.AUTONOMOUS;
 		this.state = Status.NORMAL;
 		this.temprature = false;
 		this.fuelLevel = false;
@@ -44,8 +46,8 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 					ObjectOutputStream outStream = new ObjectOutputStream(truck.Platoon[num_of_clients].getOutputStream());
 					ObjectInputStream inStream = new ObjectInputStream(truck.Platoon[num_of_clients].getInputStream());					
 					System.out.println("Creating Handler thread for the new Truck ...");
-					Thread t1 = truck.new SendState(truck.Platoon[num_of_clients], outStream);
-					t1.start();
+					//Thread t1 = truck.new SendState(truck.Platoon[num_of_clients], outStream);
+					//t1.start();
 					Thread t2 = truck.new receiveMessage(truck.Platoon[num_of_clients], inStream);
 					t2.start();
 					num_of_clients++;
@@ -102,7 +104,7 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 										synchronized(inStream) {
 											truck.setStatus((Status) inStream.readObject());
 										}										
-										System.out.println("New Status received from Server: " +truck.getStatus());
+										System.out.println("New Status received from Server");
 									}
 									// inStream.close();
 									// client.close();						
@@ -116,9 +118,9 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 					}					   				   
 				   });
 			   sendmessage.start();
-			   receiveState.start();
+			   //receiveState.start();
 		   }
-		   //Start your logic from here if you want!
+		   
 	}
 	
 	class SendState extends Thread{
@@ -129,31 +131,25 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 			this.s=s;
 			this.o=o;			
 		}
-		public void run() {
-				int c_status =0;
+		public void run() {			
 				 System.out.println("Before Writing State");
 				 System.out.println("Current Socket Status in SendState => Closed: " +s.isClosed() +" | Connected: "+s.isConnected() + " | Bound: "+s.isBound());
-				 while (true) {
-					 c_status++;
-					 state = state.NORMAL;
-					try {
-						synchronized (state) {
-							synchronized (o) {
-								if (c_status % 2 == 0)
-									state = state.BRAKE;
-								o.writeObject(state);
-								System.out.println("Successfully wrote State "+state.toString());
-							}
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					//outStream.flush();				 					 
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} 
+				 try {
+					 synchronized (state) {
+						 synchronized(o) {
+							 
+							 o.writeObject(state);
+						 }
+					 }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				 System.out.println("Successfully wrote State");
+				 //outStream.flush();				 					 
+				 try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 				
 			 
@@ -173,8 +169,7 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 					System.out.println("Before Receiving Truck");
 					System.out.println("Current Socket Status in receiveMessage => Closed: " +s.isClosed() +" | Connected: "+s.isConnected() + " | Bound: "+s.isBound());
 					synchronized(i) {
-						SingleTruck truck = (SingleTruck) i.readObject();
-						System.out.println(truck.getLicensePlate());
+						SingleTruck truck = (Truck) i.readObject();
 					}						
 					System.out.println("After Receiving Truck");
 				
