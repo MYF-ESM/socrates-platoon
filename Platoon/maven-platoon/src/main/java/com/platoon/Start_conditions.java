@@ -1,3 +1,5 @@
+package com.platoon;
+
 
 public class Start_conditions extends Thread {
 

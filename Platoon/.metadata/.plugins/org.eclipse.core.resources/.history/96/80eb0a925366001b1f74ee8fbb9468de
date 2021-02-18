@@ -1,6 +1,0 @@
-package com.platoon;
-
-public interface TruckProperties {
-	private String licensePlate;
-	private String VIN;
-}
