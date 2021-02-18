@@ -1,3 +1,5 @@
+package com.platoon;
+
 import java.util.Scanner;
 
 public class Scan_input extends Thread {

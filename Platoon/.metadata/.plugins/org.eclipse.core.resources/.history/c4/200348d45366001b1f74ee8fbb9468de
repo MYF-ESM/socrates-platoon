@@ -1,6 +1,0 @@
-package com.platoon;
-
-public interface TruckProperties {
-	public static final String licensePlate = "";
-	public static final String VIN = "";
-}

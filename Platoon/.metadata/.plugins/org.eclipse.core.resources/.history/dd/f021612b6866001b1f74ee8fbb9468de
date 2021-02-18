@@ -1,5 +1,0 @@
-package com.platoon;
-
-public enum State {
-
-}
