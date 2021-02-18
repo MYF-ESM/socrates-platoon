@@ -1,0 +1,25 @@
+package com.platoon;
+
+import java.io.Serializable;
+
+public class SingleTruck extends Thread implements TruckProperties,Serializable {
+	protected final Role role;	
+	private String licensePlate;
+	private Mode mode;
+	protected Status state;
+	private boolean temprature,fuelLevel,seatBelt;
+	
+	public SingleTruck(Role role)
+	{
+		this.role = role;		
+		this.mode = mode.AUTONOMOUS;
+		this.state = Status.NORMAL;
+		this.temprature = false;
+		this.fuelLevel = false;
+		this.seatBelt = false;
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

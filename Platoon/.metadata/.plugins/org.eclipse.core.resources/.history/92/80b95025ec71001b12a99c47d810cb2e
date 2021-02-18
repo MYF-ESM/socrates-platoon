@@ -1,0 +1,12 @@
+package com.platoon;
+
+import java.io.Serializable;
+
+public class SingleTruck extends Thread implements TruckProperties,Serializable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
