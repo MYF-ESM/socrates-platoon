@@ -1,13 +1,13 @@
 package com.platoon;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+/**
+ * Simple implementation of a truck platoon scenario using TCP/IP connection.
+ * @author Mohamed Abdulmaksoud, Vasudha Kashyap, Priyadharsini Varadharajan
+ * @version 1.0
+ */
+
 import java.io.IOException;
 import java.util.Scanner;
-
-import javax.swing.JFrame;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -16,31 +16,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+
+
 
 public class SingleTruck extends Thread implements TruckProperties,Serializable {
 	transient protected final Role role;	
 	private String licensePlate;
+	/**Either AUTONOMOUS OR PLATOON*/
 	transient private Mode mode;
+	/**Used to detect interrupts from outside,Typically keyboard */
 	protected Status interrupt_received;
+	/**Current Status of Truck based on its local data computation*/
 	protected Status local_state;
+	/**General Status of the whole Platoon*/
 	protected Status Platoon_Status;
 	private boolean temprature,fuelLevel,seatBelt;
+	/**Local Socket, used by Follower to connect to Leader*/
 	transient private Socket t_socket;
 	//Needed only for Leading Truck
+	/**A counter for tracking number of connected clients*/
 	transient private static int num_of_clients =0;
-	transient private static Socket [] Platoon = new Socket[2];	
-	transient private static ServerSocket serverSocket;
-//	protected Obstacle_distance obstacle;
-//	protected Distance distance;
-	//private static ArrayList<SingleTruck> TruckList = new ArrayList<SingleTruck>();
+	/**An array of SingleTruck objects used to track latest updates by connected trucks*/
 	private static SingleTruck[] TruckList = new SingleTruck[2];
+	/**Used to listening and connecting to other Trucks*/
+	transient private static ServerSocket serverSocket;
+	/**An obstacle in front of the truck*/
 	private static boolean obstacle_detected = false;
+	/**A truck is overheating*/
 	private static boolean overheat_detected = false;
+	/**Fuel Level is Low*/
 	private static boolean fuel_level_low = false;
+	/**Braking signal is applied*/
 	static boolean brake_pressed = false;
-	//For Handling Abrupt Closure of Sockets
-	
+	/**
+	 * Creates a Truck with default role in the platoon.
+	 * @param role The Truck role in the platoon
+	 * */	
 	public SingleTruck(Role role)
 	{
 		this.role = role;
@@ -50,43 +61,56 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 		this.temprature = false;
 		this.fuelLevel = false;
 		this.seatBelt = false;
-//		this.distance = Distance.INTERPLATOON_DISTANCE;
 	}
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		 //Initialization of Connections
-		final SingleTruck truck;	   
+		final SingleTruck truck;
+		//Checking whether the started instance is a Leader/Follower Truck
 		   if(args[0].equalsIgnoreCase("L")) {
+			   //Leader Truck
 			   truck = new SingleTruck(Role.LEAD);
+			   //Set licensePlate variable to second argument.
 			   truck.setLicensePlate(args[1]);
-			   serverSocket = new ServerSocket(9130,0,InetAddress.getByName(null));
+			   //Initializing the server socket to be ready for connections
+			   serverSocket = new ServerSocket(9130);
 			   System.out.println("Truck "+truck.getLicensePlate()+ " has started the Platoon Server");
-			   listenToFollowers(truck);			   
+			   //Call helper function to listen to incoming connections
+			   listenToFollowers(truck);
+			   //Call helper function to read keyboard interrupts
+			   truck.new readInterrupts().start();
 		   }else if(args[0].equalsIgnoreCase("F")) {
-			   truck = new SingleTruck(Role.FOLLOW);			   
+			   //Follower Truck
+			   truck = new SingleTruck(Role.FOLLOW);
+			 //Set licensePlate variable to second argument.
 			   truck.setLicensePlate(args[1]);
 			   System.out.println("Adding to arryalost");
-			   connectToPlatoon(truck);		   
+			 //Call helper function to connect to Leader Truck
+			   connectToPlatoon(truck);	
+			 //Call helper function to read keyboard interrupts
+			   truck.new readInterrupts().start();			   
 		   }		   
-		   //Start your logic from here if you want!
+		   
 	}
-	
+	/**
+	 * Helper function to listen to incoming connections to a truck.
+	 * Responsible for creating new communication handler threads for every incoming connection
+	 * After successful connections, responsible
+	 * @param truck The Leader Truck
+	 * */
 	public static void listenToFollowers(final SingleTruck truck) {
+		//For this case study, only 2 follower trucks are allowed in platoon
 		while (num_of_clients<2) {
 			try {
-				System.out.println("Listening to Connections .....");				
-				//truck.Platoon[num_of_clients] = serverSocket.accept();
+				System.out.println("Listening to Connections .....");			
+				//Blocking call waiting for new connection
 				Socket s = serverSocket.accept();
-				System.out.println("A new Truck has connected");
-				//ObjectOutputStream outStream = new ObjectOutputStream(truck.Platoon[num_of_clients].getOutputStream());
-				//ObjectInputStream inStream = new ObjectInputStream(truck.Platoon[num_of_clients].getInputStream());	
+				System.out.println("A new Truck has connected");					
 				ObjectOutputStream outStream = new ObjectOutputStream(s.getOutputStream());
 				ObjectInputStream inStream = new ObjectInputStream(s.getInputStream());	
 				System.out.println("Creating Handler thread for the new Truck ...");
-				//Thread t1 = truck.new SendState(truck.Platoon[num_of_clients], outStream,num_of_clients);
 				Thread t1 = truck.new SendState(s, outStream,num_of_clients);
-				t1.start();
-//				Thread t2 = truck.new receiveMessage(truck.Platoon[num_of_clients], inStream,num_of_clients);
+				t1.start();			
 				Thread t2 = truck.new receiveMessage(s,inStream,num_of_clients,truck);
 				t2.start();	
 				num_of_clients++;				
@@ -96,51 +120,23 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 			}
 		}
 		
-		while(true)
-		{
-			Scanner server_interrupt = new Scanner(System.in);
-			if(server_interrupt.hasNext())
-			{
-				String s1 = server_interrupt.nextLine();
-			   if(s1.equals("O"))
-			   {
-				   obstacle_detected = true;
-			   }
-			   if(s1.equals("N"))
-			   {
-				   obstacle_detected = false;
-				   overheat_detected = false;
-				   fuel_level_low = false;
-			   }
-			   if(s1.equals("H"))
-			   {
-				   overheat_detected = true;
-			   }
-			   if(s1.equals("F"))
-			   {
-				   fuel_level_low = true;
-				   System.out.println("Fuel level LOW : locating the nearest fuel station");
-				   
-			   }
-			   if(s1.equals("S"))
-			   {
-				   System.out.println("Seat belt not fastened");
-				   System.out.println("Bitte anschnalen");
-			   }
-			   if(s1.equals("A"))
-			   {
-				   System.out.println("Seat belt fastened");
-			   }
-			}
-		}
+		
 	}
 	
+	
+	/**
+	 * Helper function to listen to connect to the leading truck.
+	 * Responsible for creating 2 communication handler thread. For sending and receiving messages to/from Leading truck respectively	 * 
+	 * @param truck The Follower Truck
+	 * */
 	public static void connectToPlatoon(final SingleTruck truck) throws IOException {
+		//Flag to check connectivity of Truck
 		boolean disconnected = true;
 		//In case follower truck starts first, keep polling till server port is listening
 		while(disconnected) {
 			   try {
-				truck.t_socket = new Socket(InetAddress.getByName(null), 9130);
+				truck.t_socket = new Socket(InetAddress.getByName(TruckProperties.platoonIP), 9130);
+				//If successful connection, the truck is now in PLATOON mode
 				truck.setMode(Mode.PLATOON);
 				disconnected=false;
 			} catch (IOException e) {
@@ -150,15 +146,18 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 		   }
 			final ObjectOutputStream outStream = new ObjectOutputStream(truck.t_socket.getOutputStream());
 		   final ObjectInputStream inStream = new ObjectInputStream(truck.t_socket.getInputStream());
-		   
+		   /**
+		    * Handler used to send Truck object to the server (Leading Truck)
+		    * Does not include the error handling mechanism to reconnect to the leading truck
+		    * in case of abrupt termination of connection
+		    * Includes the safe termination of thread in case of lost connection
+		    * */
 		   Thread sendmessage = new Thread(new Runnable() {
 			   
 			public void run() {
-//				int count=0;
 				System.out.println("Follower Truck created sendmessage Thread successfully");
 				while(true) {
 					try {
-
 						synchronized (truck) {
 							synchronized(outStream) {
 								try{
@@ -177,6 +176,7 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 						Thread.sleep(1000);
 						continue;
 					}catch (Exception e) {
+						//A connection error with the Server, reset Mode and let Receive Thread handle reconnectivity
 						System.out.println("Failed to send the Truck: " + truck.getLicensePlate() + "data");
 						truck.setMode(Mode.AUTONOMOUS);
 						e.printStackTrace();
@@ -185,6 +185,12 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 			}
 
 		   });
+		   /**
+		    * Handler used to send Truck object to the server (Leading Truck)
+		    * Includes the error handling mechanism to reconnect to the leading truck
+		    * in case of abrupt termination of connection
+		    * Includes the safe termination of thread in case of lost connection
+		    * */
 		   Thread receiveState = new Thread(new Runnable() {
 
 			   public void run() {
@@ -224,9 +230,14 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 					}
 				}
 			});
-			
-			   Thread interrupt = new Thread(new Runnable() {
-				   /* Receive interrupt from keyboard to introduce obstacle or fuel level or over heat conditions in the client trucks */
+		   /** Receive interrupt from keyboard to introduce obstacle or fuel level or over heat conditions in the client trucks
+		    * The following characters are used to depict the related status:
+		    * 'O' => Obstacle
+		    * 'N' => Normal
+		    * 'H' => Overheat
+		    * 'F' => Low Fuel Level
+		    *  */
+			   Thread interrupt = new Thread(new Runnable() {				   
 				   public void run()
 				   {
 					   while(true)
@@ -258,6 +269,9 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 				   }
 				   
 			   });
+			   /**
+			    * Helper thread to simulate the autonomous behavior of the follower truck
+			    * */
 			   Thread Localstatus = new Thread(new Runnable() {
 
 				   public void run()
@@ -336,7 +350,6 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 						   try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					   }
@@ -348,12 +361,67 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 		   interrupt.start();
 		   Localstatus.start(); 
 	}
-	
+	/**
+	 * Helper thread to read keyboard interrupts for the Platoon leader.
+	 * */
+	class readInterrupts extends Thread{
+		
+			public void run() {
+						Scanner server_interrupt = new Scanner(System.in);
+		while(true)
+		{
+			
+			if(server_interrupt.hasNext())
+			{
+				String s1 = server_interrupt.nextLine();
+			   if(s1.equals("O"))
+			   {
+				   obstacle_detected = true;
+			   }
+			   if(s1.equals("N"))
+			   {
+				   obstacle_detected = false;
+				   overheat_detected = false;
+				   fuel_level_low = false;
+			   }
+			   if(s1.equals("H"))
+			   {
+				   overheat_detected = true;
+			   }
+			   if(s1.equals("F"))
+			   {
+				   fuel_level_low = true;
+				   System.out.println("Fuel level LOW : locating the nearest fuel station");
+				   
+			   }
+			   if(s1.equals("S"))
+			   {
+				   System.out.println("Seat belt not fastened");
+				   System.out.println("Bitte anschnalen");
+			   }
+			   if(s1.equals("A"))
+			   {
+				   System.out.println("Seat belt fastened");
+			   }
+			}
+		}
+			}
+		
+	}
+	/**
+	 * Helper thread to send the current platoon status from the leader truck to the connected truck
+	 * */
 	class SendState extends Thread{
 		
 		final ObjectOutputStream o;
 		final Socket s;
 		final int ID;
+		/**
+		 * Initialize the thread
+		 * @param s the connected truck socket
+		 * @param o the output stream of the socket
+		 * @param ID the current index of truck
+		 * */
 		public SendState(Socket s,ObjectOutputStream o,int ID) {
 			this.ID=ID;
 			this.s=s;
@@ -374,8 +442,7 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 					catch (IOException e) {						
 						e.printStackTrace();
 						
-					}
-					//outStream.flush();				 					 
+					}									 					 
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
@@ -386,12 +453,24 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 			 
 		}
 	}
+	/**
+	 * Helper thread to receive the connected trucks status. Updating the platoon array.
+	 * Based on inputs received, determines Platoon status as well
+	 * Includes Error Handling option to reconnect to disconnected clients (follower trucks)
+	 * */
 	class receiveMessage extends Thread{	
 		final int ID;
 		final ObjectInputStream i;
 		final Socket s;
 		SingleTruck server;
 		SingleTruck receive_truck;
+		/**
+		 * Initializing the thread
+		 * @param s the connected truck socket
+		 * @param o the output stream of the socket
+		 * @param ID the current truck index
+		 * @param truck the server truck instance in main method
+		 * */
 		public receiveMessage(Socket s,ObjectInputStream i,int ID,SingleTruck truck) {
 			this.ID=ID;
 			this.s=s;
@@ -471,9 +550,7 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 						}
 					}
 					Thread.sleep(1000);
-					continue;
-					// inStream.close();
-					// client.close();
+					continue;					
 				} catch (SocketException e) {
 					num_of_clients--;
 					do {
@@ -564,17 +641,6 @@ public class SingleTruck extends Thread implements TruckProperties,Serializable 
 	public Role getRole() {
 		return role;
 	}
-	
-//	public Distance getDistance()
-//	{
-//		return distance;
-//	}
-//	
-//	public void setDistance(Distance d)
-//	{
-//		distance = d;
-//		
-//	}
 
 }
 
